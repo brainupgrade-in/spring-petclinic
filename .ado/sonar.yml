@@ -37,6 +37,7 @@ jobs:
         configMode: 'manual'
         cliProjectKey: 'brainupgrade-in_spring-petclinic'
         cliProjectName: 'spring-petclinic'
+        extraProperties: sonar.organization=brainupgrade-in
         cliSources: '.'
     - task: SonarQubeAnalyze@7
       inputs:
