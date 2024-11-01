@@ -14,8 +14,21 @@ jobs:
         SonarCloud: 'sonar-cloud'
         organization: 'brainupgrade-in'
         scannerMode: 'other'
-    # Run Code Analysis task
-    - task: SonarCloudAnalyze@3
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenVersionOption: 'Default'
+        mavenOptions: '-Xmx3072m'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: true
+        sqMavenPluginVersionChoice: 'latest'
+      env:
+        JAVA_HOME_17_X64: "/usr/lib/jvm/java-17-openjdk-amd64"
+        PATH: "/usr/lib/jvm/java-17-openjdk-amd64/bin:$(PATH)"
 
     # Publish Quality Gate Result task
     - task: SonarCloudPublish@3
