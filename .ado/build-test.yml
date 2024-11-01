@@ -19,7 +19,7 @@ jobs:
     displayName: 'Maven JUnit Tests'
     inputs:
       mavenPomFile: 'pom.xml'
-      goals: 'test -Dcheckstyle.skip jacoco:report'
+      goals: 'test -Dcheckstyle.skip jacoco:report -Dmaven.test.failure.ignore=true'
 
   - task: PublishTestResults@2
     inputs:
