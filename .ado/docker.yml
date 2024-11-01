@@ -1,7 +1,8 @@
 trigger: none
 
 pool:
-  vmImage: 'ubuntu-latest'
+  # vmImage: 'ubuntu-latest'
+  name: selfhosted
 
 variables:
   dockerRegistryServiceConnection: 'docker-hub-credentials'
@@ -9,9 +10,9 @@ variables:
   containerImageTag: '$(Build.BuildId)'
 
 steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.x'
+# - task: UsePythonVersion@0
+#   inputs:
+#     versionSpec: '3.x'
 
 - task: Docker@2
   displayName: 'Docker Build and Push'
