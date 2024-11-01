@@ -14,17 +14,22 @@ jobs:
         SonarCloud: 'sonar-cloud'
         organization: 'brainupgrade-in'
         scannerMode: 'other'
-    - task: SonarQubePrepare@5
+    - task: Maven@4
       inputs:
-        SonarQube: 'sonar-cloud'
-        scannerMode: 'CLI'
-        configMode: 'manual'
-        cliProjectKey: 'spring-petclinic'
-        cliOrganization: 'brainupgrade-in'
-        extraProperties: |
-          sonar.sources=.
-          sonar.host.url=https://sonarcloud.io
-
+        mavenPomFile: 'pom.xml'
+        options: '-Dcheckstyle.skip -DskipTests -Dsonar.projectKey=brainupgrade_spring-petclinic'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenVersionOption: 'Default'
+        mavenOptions: '-Xmx3072m'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: true
+        sqMavenPluginVersionChoice: 'latest'
+      env:
+        JAVA_HOME_17_X64: "/usr/lib/jvm/java-17-openjdk-amd64"
+        PATH: "/usr/lib/jvm/java-17-openjdk-amd64/bin:$(PATH)"
 
     # Publish Quality Gate Result task
     - task: SonarCloudPublish@3
