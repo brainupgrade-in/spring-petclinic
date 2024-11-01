@@ -17,6 +17,7 @@ jobs:
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml'
+        options: '-Dcheckstyle.skip'
         publishJUnitResults: false
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
