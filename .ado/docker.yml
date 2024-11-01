@@ -19,6 +19,6 @@ steps:
   inputs:
     command: 'buildAndPush'
     repository: '$(imageRepository)'
-    dockerfile: '**/Dockerfile'
+    dockerfile: '**/Dockerfile-multi'
     containerRegistry: '$(dockerRegistryServiceConnection)'
     tags: '$(containerImageTag),latest'
