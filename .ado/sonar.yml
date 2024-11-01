@@ -17,7 +17,7 @@ jobs:
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml'
-        options: '-Dcheckstyle.skip -DskipTests -Dsonar.projectKey=brainupgrade_spring-petclinic'
+        options: '-Dcheckstyle.skip -DskipTests -Dsonar.projectKey=brainupgrade-in_spring-petclinic'
         publishJUnitResults: false
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
