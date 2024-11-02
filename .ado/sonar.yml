@@ -39,26 +39,6 @@ jobs:
       env:
         JAVA_HOME_17_X64: "/usr/lib/jvm/java-17-openjdk-amd64"
         PATH: "/usr/lib/jvm/java-17-openjdk-amd64/bin:$(PATH)"
-    # - task: SonarQubePrepare@7
-    #   inputs:
-    #     SonarQube: 'sonar-qube'
-    #     scannerMode: 'cli'
-    #     configMode: 'manual'
-    #     cliProjectKey: 'brainupgrade-in_spring-petclinic'
-    #     cliProjectName: 'spring-petclinic'
-    #     extraProperties: sonar.organization=brainupgrade-in
-    #     cliSources: '.'
-    # - task: SonarQubeAnalyze@7
-    #   inputs:
-    #     jdkversion: 'JAVA_HOME_17_X64'
-    # - task: SonarQubePublish@7
-    #   inputs:
-    #     pollingTimeoutSec: '300'
-
-    # Publish Quality Gate Result task
-    # - task: SonarCloudAnalyze@3
-    #   inputs:
-    #     jdkversion: 'JAVA_HOME_17_X64'
     - task: SonarCloudPublish@3
       inputs:
         pollingTimeoutSec: '300'       
