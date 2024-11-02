@@ -21,6 +21,7 @@ jobs:
           sonar.organization=brainupgrade-in
           sonar.java.binaries=target/classes
           sonar.sources=.
+          sonar.exclusions=**/*Test.java,**/test/**
         cliSources: '.'        
     - task: Maven@4
       inputs:
