@@ -9,43 +9,52 @@ jobs:
   displayName: "Build, Test, and Analyze"
   steps:
 
-    # - task: SonarCloudPrepare@3
-    #   inputs:
-    #     SonarCloud: 'sonar-cloud'
-    #     organization: 'brainupgrade-in'
-    #     scannerMode: 'other'
-    - task: Maven@4
+    - task: SonarCloudPrepare@3
       inputs:
-        mavenPomFile: 'pom.xml'
-        options: '-Dcheckstyle.skip -DskipTests -Dsonar.projectKey=brainupgrade-in_spring-petclinic'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenVersionOption: 'Default'
-        mavenOptions: '-Xmx3072m'
-        mavenAuthenticateFeed: false
-        effectivePomSkip: false
-        # sonarQubeRunAnalysis: true
-        sqMavenPluginVersionChoice: 'latest'
-      env:
-        JAVA_HOME_17_X64: "/usr/lib/jvm/java-17-openjdk-amd64"
-        PATH: "/usr/lib/jvm/java-17-openjdk-amd64/bin:$(PATH)"
-    - task: SonarQubePrepare@7
-      inputs:
-        SonarQube: 'sonar-qube'
+        SonarCloud: 'sonar-cloud'
+        organization: 'brainupgrade-in'
         scannerMode: 'cli'
         configMode: 'manual'
         cliProjectKey: 'brainupgrade-in_spring-petclinic'
         cliProjectName: 'spring-petclinic'
         extraProperties: sonar.organization=brainupgrade-in
-        cliSources: '.'
-    - task: SonarQubeAnalyze@7
+        cliSources: '.'        
+    # - task: Maven@4
+    #   inputs:
+    #     mavenPomFile: 'pom.xml'
+    #     options: '-Dcheckstyle.skip -DskipTests -Dsonar.projectKey=brainupgrade-in_spring-petclinic'
+    #     publishJUnitResults: false
+    #     javaHomeOption: 'JDKVersion'
+    #     jdkVersionOption: '1.17'
+    #     mavenVersionOption: 'Default'
+    #     mavenOptions: '-Xmx3072m'
+    #     mavenAuthenticateFeed: false
+    #     effectivePomSkip: false
+    #     # sonarQubeRunAnalysis: true
+    #     sqMavenPluginVersionChoice: 'latest'
+    #   env:
+    #     JAVA_HOME_17_X64: "/usr/lib/jvm/java-17-openjdk-amd64"
+    #     PATH: "/usr/lib/jvm/java-17-openjdk-amd64/bin:$(PATH)"
+    # - task: SonarQubePrepare@7
+    #   inputs:
+    #     SonarQube: 'sonar-qube'
+    #     scannerMode: 'cli'
+    #     configMode: 'manual'
+    #     cliProjectKey: 'brainupgrade-in_spring-petclinic'
+    #     cliProjectName: 'spring-petclinic'
+    #     extraProperties: sonar.organization=brainupgrade-in
+    #     cliSources: '.'
+    # - task: SonarQubeAnalyze@7
+    #   inputs:
+    #     jdkversion: 'JAVA_HOME_17_X64'
+    # - task: SonarQubePublish@7
+    #   inputs:
+    #     pollingTimeoutSec: '300'
+
+    # Publish Quality Gate Result task
+    - task: SonarCloudAnalyze@3
       inputs:
         jdkversion: 'JAVA_HOME_17_X64'
-    - task: SonarQubePublish@7
+    - task: SonarCloudPublish@3
       inputs:
-        pollingTimeoutSec: '300'
-    # # Publish Quality Gate Result task
-    # - task: SonarCloudPublish@3
-    #   inputs:
-    #     pollingTimeoutSec: '300'       
+        pollingTimeoutSec: '300'       
