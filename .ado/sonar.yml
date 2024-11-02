@@ -14,22 +14,22 @@ jobs:
     #     SonarCloud: 'sonar-cloud'
     #     organization: 'brainupgrade-in'
     #     scannerMode: 'other'
-    # - task: Maven@4
-    #   inputs:
-    #     mavenPomFile: 'pom.xml'
-    #     options: '-Dcheckstyle.skip -DskipTests -Dsonar.projectKey=brainupgrade-in_spring-petclinic'
-    #     publishJUnitResults: false
-    #     javaHomeOption: 'JDKVersion'
-    #     jdkVersionOption: '1.17'
-    #     mavenVersionOption: 'Default'
-    #     mavenOptions: '-Xmx3072m'
-    #     mavenAuthenticateFeed: false
-    #     effectivePomSkip: false
-    #     sonarQubeRunAnalysis: true
-    #     sqMavenPluginVersionChoice: 'latest'
-    #   env:
-    #     JAVA_HOME_17_X64: "/usr/lib/jvm/java-17-openjdk-amd64"
-    #     PATH: "/usr/lib/jvm/java-17-openjdk-amd64/bin:$(PATH)"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml'
+        options: '-Dcheckstyle.skip -DskipTests -Dsonar.projectKey=brainupgrade-in_spring-petclinic'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenVersionOption: 'Default'
+        mavenOptions: '-Xmx3072m'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        # sonarQubeRunAnalysis: true
+        sqMavenPluginVersionChoice: 'latest'
+      env:
+        JAVA_HOME_17_X64: "/usr/lib/jvm/java-17-openjdk-amd64"
+        PATH: "/usr/lib/jvm/java-17-openjdk-amd64/bin:$(PATH)"
     - task: SonarQubePrepare@7
       inputs:
         SonarQube: 'sonar-qube'
