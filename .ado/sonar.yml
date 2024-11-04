@@ -9,7 +9,7 @@ pr:
 
 pool:
   # vmImage: 'ubuntu-latest'
-  name: selfhosted
+  name: github
 
 jobs:
 - job: BuildAndTest
