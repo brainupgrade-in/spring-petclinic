@@ -8,28 +8,29 @@ pr:
       - '*'  # Don't trigger on PRs
 
 pool:
-  # vmImage: 'ubuntu-latest'
-  name: github
+  vmImage: 'ubuntu-latest'
+  # name: github
 
 jobs:
 - job: BuildAndTest
   displayName: "Build, Test, and Analyze"
   steps:
+    - task: JavaToolInstaller@0
+      inputs:
+        versionSpec: '17'
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'PreInstalled'
+      displayName: 'Set up JDK 17'
 
     - task: SonarCloudPrepare@3
       inputs:
         SonarCloud: 'sonar-cloud'
         organization: 'brainupgrade-in'
-        scannerMode: 'cli'
-        configMode: 'manual'
-        cliProjectKey: 'brainupgrade-in_spring-petclinic'
-        cliProjectName: 'spring-petclinic'
+        scannerMode: 'Other'
+        projectKey: 'brainupgrade-in_spring-petclinic'
+        projectName: 'spring-petclinic'
         extraProperties: |
-          sonar.organization=brainupgrade-in
-          sonar.java.binaries=target/classes
-          sonar.sources=.
-          sonar.exclusions=**/*Test.java,**/test/**
-        cliSources: '.'        
+          sonar.java.binaries=target/classes        
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml'
@@ -43,9 +44,7 @@ jobs:
         effectivePomSkip: false
         sonarQubeRunAnalysis: true
         sqMavenPluginVersionChoice: 'latest'
-      env:
-        JAVA_HOME_17_X64: "/usr/lib/jvm/java-17-openjdk-amd64"
-        PATH: "/usr/lib/jvm/java-17-openjdk-amd64/bin:$(PATH)"
+      displayName: 'Maven build with SonarCloud analysis'
     - task: SonarCloudPublish@3
       inputs:
         pollingTimeoutSec: '300'       
